@@ -14,6 +14,7 @@ const generateOrSetBarcode = asyncHandler(async (req, res) => {
   // Check if a barcode for the given date already exists
   let barcode = await Barcode.findOne({ date });
 
+
   if (barcode) {
     barcode.code = code; // Update the code for the given date
   } else {

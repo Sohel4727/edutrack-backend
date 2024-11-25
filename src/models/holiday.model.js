@@ -1,13 +1,25 @@
-// models/holiday.model.js
 import mongoose from "mongoose";
 
-const holidaySchema = new mongoose.Schema(
+const HolidaySchema = new mongoose.Schema(
   {
-    date: { type: String, unique: true, required: true }, // Format: YYYY-MM-DD
-    description: { type: String, required: true }, // Holiday description
+    date: {
+      type: Date,
+      required: true,
+      unique: true, // Ensures no duplicate holidays for the same date
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      enum: ["admin", "government"], // Specifies the type of holiday
+      default: "admin", // Default is admin-provided holidays
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true, // Automatically adds `createdAt` and `updatedAt` fields
+  }
 );
 
-const Holiday = mongoose.model("Holiday", holidaySchema);
-export { Holiday };
+export const Holiday = mongoose.model("Holiday", HolidaySchema);

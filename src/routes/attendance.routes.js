@@ -41,7 +41,7 @@
 
 
 import express from "express";
-import { getUserAttendance, markAttendance,getAllUsersAttendanceSummary,getSingleUserAttendanceSummary,addHoliday } from "../controllers/attendance.controller.js";
+import { getUserAttendance, markAttendance,getAllUsersAttendanceSummary,getSingleUserAttendanceSummary,addHoliday,getAllHolidays, addGovernmentHolidays, getAllSortedHolidays, deleteHoliday, updateHoliday } from "../controllers/attendance.controller.js";
 import { verifyJWT, verifyRole } from "../middlewares/auth.middleware.js";
 
 
@@ -60,5 +60,11 @@ router.get("/admin/userAttendance/:userId", verifyJWT, verifyRole(["admin"]), ge
 
 // Add a holiday
 router.post("/admin/addHoliday", verifyJWT, verifyRole(["admin"]), addHoliday);
+router.get("/admin/allHolidays", verifyJWT, verifyRole(["admin"]), getAllHolidays);
+router.post("/admin/government", verifyJWT, verifyRole(["admin"]),addGovernmentHolidays); // Add government holidays
 
+router.get("/admin/allHolidays", verifyJWT, verifyRole(["admin"]),getAllSortedHolidays);
+router.delete("/admin/deleteHoliday",verifyJWT, verifyRole(["admin"]), deleteHoliday);
+router.put("/admin/updateHoliday", verifyJWT, verifyRole(["admin"]),updateHoliday);
 export default router;
+

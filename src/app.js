@@ -16,8 +16,9 @@ app.use(cookieParser());
 // routes
 
 import authRouter from "./routes/auth.routes.js";
-import attendanceRouter from "./routes/attendance.routes.js"
-import barcodeRoutes from "./routes/barcode.routes.js"
+import attendanceRouter from "./routes/attendance.routes.js";
+import barcodeRoutes from "./routes/barcode.routes.js";
+import leaveRoutes from "./routes/leave.routes.js";
 
 // routes declarations
 app.use("/api/v1/auth", authRouter);
@@ -25,5 +26,6 @@ app.use("/api/v1/auth", authRouter);
 
 app.use("/api/v1/attendance", attendanceRouter); // Use the attendance routes
 app.use("/api/v1/barcode", barcodeRoutes);
+app.use("/api/v1/leave", leaveRoutes);
 
 export { app };
