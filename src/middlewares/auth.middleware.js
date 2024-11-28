@@ -12,7 +12,6 @@
 //       req.cookie?.accessToken ||
 //       req.header("Authorization")?.replace("Bearer ", "");
 
-//     console.log("auth.js file token", token);
 
 //     if (!token) {
 //       throw new ApiError(401, "Unauthorized request");
@@ -120,7 +119,6 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
   );
   if (!user) throw new ApiError(401, "Unauthorized request: User not found");
 
-  console.log("Decoded role in token===>", user.role); // Verify this line
   req.user = user;
   next();
 });
@@ -128,9 +126,6 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
 // Role-based access control middleware
 export const verifyRole = (roles) => {
   return asyncHandler((req, _, next) => {
-    console.log("Requested roles array===>", roles);
-    console.log("User's role from token===>", req.user.role);
-
     if (!roles.includes(req.user.role)) {
       throw new ApiError(403, "Access denied. Insufficient permissions.");
     }

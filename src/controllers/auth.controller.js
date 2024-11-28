@@ -55,7 +55,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // Upload avatar to Cloudinary
   const avatar = await uploadOnCloudinary(avatarLocalPath);
-  console.log("avatar upload response", avatar);
   if (!avatar) {
     throw new ApiError(400, "Failed to upload avatar to Cloudinary");
   }
@@ -354,7 +353,6 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
 
 // user channel profile
 // const getUserChannelProfile = asyncHandler(async (req, res) => {
-//   console.log("===>",req.params);
 //   const { username } = req.params;
 //   if (!username?.trim()) {
 //     throw new ApiError(400, "username is missing");
@@ -428,7 +426,6 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
 //       new ApiResponse(200, channel[0], "User channel fetched successfully")
 //     );
 
-//   // console.log("====>", channel);
 // });
 
 // watch history
