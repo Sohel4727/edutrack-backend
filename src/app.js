@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import cron from "node-cron";  // Import node-cron
+import {Barcode} from "./models/barcode.model.js"; // Import the Barcode model
 const app = express();
 app.use(
   cors({
@@ -28,4 +30,14 @@ app.use("/api/v1/attendance", attendanceRouter); // Use the attendance routes
 app.use("/api/v1/barcode", barcodeRoutes);
 app.use("/api/v1/leave", leaveRoutes);
 
+
+// Cron job to delete all barcode entries at midnight every day
+cron.schedule("0 0 * * *", async () => {
+  try {
+    await Barcode.deleteMany({}); // Clear all barcode records
+    console.log("Deleted all barcode records at midnight");
+  } catch (err) {
+    console.error("Failed to delete barcode records:", err.message);
+  }
+});
 export { app };
